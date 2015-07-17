@@ -10,6 +10,11 @@ export default React.createClass({
     return {lastTap: 0}
   },
 
+  /*
+    Mobile double tap muting to prevent unwanted content zoom.
+    Instead of adding a markup tag to control content scale which might
+    prevent zoom levels on non-mobile
+  */
   muteDoubleTap(e) {
     let timeBetweenTaps = e.timeStamp - this.state.lastTap;
 
@@ -23,7 +28,6 @@ export default React.createClass({
 
   render: function() {
     let style = { minHeight: `${window.innerHeight}px`};
-
     let touchEndFn = helpers.isMobile(window) ? this.muteDoubleTap : function() {};
 
     return (
